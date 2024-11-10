@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.API", "BookingSystem.API\BookingSystem.API.csproj", "{11A50963-1B8E-44DC-969E-5103EFC5EE17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingSystem.Entities", "BookingSystem.Entities\BookingSystem.Entities.csproj", "{2FDCDDAA-8725-43F8-A48B-486207857F01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11A50963-1B8E-44DC-969E-5103EFC5EE17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A50963-1B8E-44DC-969E-5103EFC5EE17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A50963-1B8E-44DC-969E-5103EFC5EE17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A50963-1B8E-44DC-969E-5103EFC5EE17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDCDDAA-8725-43F8-A48B-486207857F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDCDDAA-8725-43F8-A48B-486207857F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDCDDAA-8725-43F8-A48B-486207857F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDCDDAA-8725-43F8-A48B-486207857F01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
