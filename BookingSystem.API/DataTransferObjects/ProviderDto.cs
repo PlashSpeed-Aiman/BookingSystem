@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using BookingSystem.Entities.Model;
 
 namespace BookingSystem.API.DataTransferObjects;
@@ -28,6 +29,7 @@ public class UpdateProviderDto
 
     public string Phone { get; set; }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]  
     public Provider.ProviderStatus Status { get; set; }
 }
 
@@ -37,5 +39,6 @@ public class ProviderDto
     public string? Name { get; set; }
     public string? Email { get; set; }
     public string? Phone { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]  
     public Provider.ProviderStatus Status { get; set; }
 }

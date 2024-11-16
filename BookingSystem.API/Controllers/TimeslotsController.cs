@@ -1,10 +1,12 @@
-﻿using BookingSystem.API.DataTransferObjects;
+﻿using System.Globalization;
+using BookingSystem.API.DataTransferObjects;
 using BookingSystem.Entities.DbContext;
 using BookingSystem.Entities.Model;
 using Mapster;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 
 namespace BookingSystem.API.Controllers;
 
@@ -45,10 +47,18 @@ public class TimeslotsController : ControllerBase
     // - provider_id (optional)
     //     - service_id (optional)
     [HttpGet("available")]
-    public async Task<IActionResult> GetAvailableTimeslots([FromQuery] string date, [FromQuery] string? providerId, [FromQuery] string? serviceId)
+    public async Task<IActionResult> GetAvailableTimeslots([FromQuery] string? dateStr, [FromQuery] string? providerId, [FromQuery] string? serviceId)
     {
+        
+       
         var query = _context.TimeSlots
-            .Where(t => t.StartTime.Date.ToString("yyyy-MM-dd") == date && t.Status != TimeSlot.TimeSlotStatus.Booked);
+            .Where(t =>  t.Status == TimeSlot.TimeSlotStatus.Available);
+
+        if (!string.IsNullOrEmpty(dateStr))
+        {
+            
+            query = query.Where(t => t.StartTime.Date == ParseDate(dateStr).Date);
+        }
         
         if (providerId != null)
         {
@@ -67,6 +77,7 @@ public class TimeslotsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateTimeslot([FromBody] CreateTimeSlotDto createTimeslotDto)
     {
+        
         var timeslot = createTimeslotDto.Adapt<TimeSlot>();
         _context.TimeSlots.Add(timeslot);
         await _context.SaveChangesAsync();
@@ -99,5 +110,14 @@ public class TimeslotsController : ControllerBase
         _context.TimeSlots.Remove(timeslot);
         await _context.SaveChangesAsync();
         return NoContent();
+    }
+    
+    private static DateTime ParseDate(string dateStr)
+    {
+        return DateTime.ParseExact(
+            dateStr,
+            "yyyy-MM-dd",
+            CultureInfo.InvariantCulture
+        );
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BookingSystem.Entities.EntityConfigurations
 {
-    
+
     public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
     {
         public void Configure(EntityTypeBuilder<Provider> builder)
@@ -26,7 +26,9 @@ namespace BookingSystem.Entities.EntityConfigurations
                 .WithOne(b => b.Provider)
                 .HasForeignKey(b => b.ProviderId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
+            builder.Property(e => e.Status).HasConversion<string>();
+
         }
     }
 
@@ -35,15 +37,16 @@ namespace BookingSystem.Entities.EntityConfigurations
         public void Configure(EntityTypeBuilder<Service> builder)
         {
             builder.HasKey(s => s.ServiceId);
+            builder.Property(e => e.Status).HasConversion<string>();
         }
     }
-    
+
     public class BookingConfiguration : IEntityTypeConfiguration<BookingSystem.Entities.Model.Booking>
     {
         public void Configure(EntityTypeBuilder<BookingSystem.Entities.Model.Booking> builder)
         {
             builder.HasKey(b => b.BookingId);
-            
+
             builder.HasOne(b => b.User)
                 .WithMany(u => u.Bookings)
                 .HasForeignKey(b => b.UserId)
@@ -58,6 +61,19 @@ namespace BookingSystem.Entities.EntityConfigurations
                 .WithOne(ts => ts.Booking)
                 .HasForeignKey<BookingSystem.Entities.Model.Booking>(b => b.TimeSlotId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(e => e.Status)
+                .HasConversion<string>();
+        }
+    }
+
+    public class TimeSlotConfiguration : IEntityTypeConfiguration<TimeSlot>
+    {
+        public void Configure(EntityTypeBuilder<TimeSlot> builder)
+        {
+            builder.Property(e => e.Status).HasConversion(
+                v => v.ToString(),
+                v => (TimeSlot.TimeSlotStatus)Enum.Parse(typeof(TimeSlot.TimeSlotStatus), v));
         }
     }
 }

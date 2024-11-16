@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using BookingSystem.Entities.Model;
 
 namespace BookingSystem.API.DataTransferObjects;
@@ -45,6 +46,7 @@ public class UpdateServiceDto
     [Column(TypeName = "decimal(18,2)")]
     public decimal Price { get; set; }
     
+    [JsonConverter(typeof(JsonStringEnumConverter))]  
     [Required]
     public Service.ServiceStatus Status { get; set; }
 }
@@ -70,7 +72,8 @@ public class ServiceDto
     [Required]
     [Column(TypeName = "decimal(18,2)")]
     public decimal Price { get; set; }
-
+    
+    [JsonConverter(typeof(JsonStringEnumConverter))]  
     [Required]
     public Service.ServiceStatus Status { get; set; }
 }

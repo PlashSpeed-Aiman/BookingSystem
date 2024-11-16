@@ -80,6 +80,18 @@ namespace BookingSystem.Entities.DbContext
             modelBuilder.Entity<TimeSlot>()
                 .HasIndex(t => new { t.ProviderId, t.StartTime, t.EndTime });
             
+            modelBuilder.Entity<TimeSlot>().Property(e => e.Status).HasConversion(
+                v => v.ToString(),
+                v => (TimeSlot.TimeSlotStatus)Enum.Parse(typeof(TimeSlot.TimeSlotStatus), v));
+            modelBuilder.Entity<Provider>().Property(e => e.Status).HasConversion(
+                v => v.ToString(),
+                v => (Provider.ProviderStatus)Enum.Parse(typeof(Provider.ProviderStatus), v));
+            modelBuilder.Entity<Service>().Property(e => e.Status).HasConversion(
+                v => v.ToString(),
+                v => (Service.ServiceStatus)Enum.Parse(typeof(Service.ServiceStatus), v));
+            modelBuilder.Entity<Booking>().Property(e => e.Status).HasConversion(
+                v => v.ToString(),
+                v => (Booking.BookingStatus)Enum.Parse(typeof(Booking.BookingStatus), v));
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

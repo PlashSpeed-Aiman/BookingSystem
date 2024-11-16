@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using BookingSystem.Entities.Model;
 
 namespace BookingSystem.API.DataTransferObjects;
@@ -44,5 +45,6 @@ public class BookingDto
 
     public string TimeSlotId { get; set; }
     
+    [JsonConverter(typeof(JsonStringEnumConverter))]  
     public Booking.BookingStatus Status { get; set; }
 }
