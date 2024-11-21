@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MigrateDatabase();
 app.UseAuthorization();
 
 app.MapControllers();

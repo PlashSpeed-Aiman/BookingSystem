@@ -20,6 +20,7 @@ public class CreateProviderDto
 
 public class UpdateProviderDto
 {
+    [Required]
     public string? ProviderId { get; set; }
 
     [MaxLength(100)]
