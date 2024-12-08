@@ -6,7 +6,7 @@ namespace BookingSystem.API.DataTransferObjects;
 
 public class CreateBookingDto
 {
-    public Guid UserId { get; set; }
+    public string? UserId { get; set; }
 
     [Required]
     public string ProviderId { get; set; }
@@ -22,7 +22,7 @@ public class UpdateBookingDto
 {
     public string BookingId { get; set; } 
 
-    public Guid UserId { get; set; }
+    public Guid? UserId { get; set; }
 
     public string ProviderId { get; set; }
 

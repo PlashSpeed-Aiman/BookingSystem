@@ -22,12 +22,12 @@ public class BookingsController : ControllerBase
     
     // POST   /api/v1/bookings
     [HttpPost]
-    public async Task<IActionResult> CreateBooking([FromBody] CreateBookingDto createBookingDto, [FromQuery] string? name, [FromQuery] string? telPhone)
+    public async Task<IActionResult> CreateBooking([FromBody] CreateBookingDto createBookingDto, [FromQuery] string? name, [FromQuery] string? phoneNumber)
     {
         var res = createBookingDto.Adapt<Booking>();
         res.Status = Booking.BookingStatus.Booked;
         res.CustomerName = name;
-        res.CustomerTelephone = telPhone;
+        res.CustomerTelephone = phoneNumber;
         var booking = _context.Bookings.Add(res);
         
         var timeslot = await _context.TimeSlots.FindAsync(createBookingDto.TimeSlotId);
