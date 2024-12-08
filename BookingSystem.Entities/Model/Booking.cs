@@ -7,8 +7,7 @@ public class Booking : BaseEntity
     [Key]
     public string BookingId { get; set; } = Guid.NewGuid().ToString();
     
-    [Required]
-    public Guid UserId { get; set; }
+    public Guid? UserId { get; set; }
 
     [Required]
     public string ProviderId { get; set; }
@@ -18,10 +17,14 @@ public class Booking : BaseEntity
 
     [Required]
     public string TimeSlotId { get; set; }
+    
+    public string? CustomerName { get; set; }
+    
+    public string? CustomerTelephone { get; set; }
 
     [Required]
     public BookingStatus Status { get; set; }
-
+    
     // Navigation properties
     [ForeignKey("UserId")]
     public ApplicationUser User { get; set; }

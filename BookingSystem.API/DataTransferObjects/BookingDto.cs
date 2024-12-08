@@ -8,10 +8,13 @@ public class CreateBookingDto
 {
     public Guid UserId { get; set; }
 
+    [Required]
     public string ProviderId { get; set; }
 
+    [Required]
     public string ServiceId { get; set; }
 
+    [Required]
     public string TimeSlotId { get; set; }
 }
 

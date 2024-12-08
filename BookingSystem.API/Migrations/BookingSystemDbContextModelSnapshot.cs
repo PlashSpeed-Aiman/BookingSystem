@@ -102,6 +102,12 @@ namespace BookingSystem.API.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CustomerTelephone")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ProviderId")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -121,7 +127,7 @@ namespace BookingSystem.API.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("BookingId");
@@ -392,8 +398,7 @@ namespace BookingSystem.API.Migrations
                     b.HasOne("BookingSystem.Entities.Model.ApplicationUser", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Provider");
 
